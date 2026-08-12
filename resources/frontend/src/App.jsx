@@ -1,0 +1,20 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Categories from "./pages/Categories";
+import Products from "./pages/Products";
+
+function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/products" element={<Products />} />
+            </Routes>
+        </BrowserRouter>
+    );
+}
+
+export default App;
