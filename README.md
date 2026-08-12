@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -57,3 +58,84 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# Inventory Management
+
+A full-stack Inventory Management System built using Laravel REST API, React.js, MySQL, and Laravel Sanctum.
+
+## Tech Stack
+
+- Laravel
+- React.js
+- MySQL
+- Laravel Sanctum
+- Bootstrap
+- Axios
+
+## Features
+
+- User Authentication (Login/Logout)
+- Product Management
+- Category Management
+- Dashboard
+- Protected APIs
+
+## Installation
+
+### Backend
+
+```bash
+git clone [<repository-url>] : (https://github.com/azimkhan07/inventory-management)
+cd backend
+
+composer install
+
+cp .env.example .env
+
+php artisan key:generate
+```
+
+Configure your MySQL database in the `.env` file.
+
+Run:
+
+```bash
+php artisan migrate --seed
+```
+
+Start Laravel:
+
+```bash
+php artisan serve
+```
+
+---
+
+### Frontend
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+## Test Login
+
+Email:
+
+```
+admin@test.com
+```
+
+Password:
+
+```
+password
+```
+
+## API Authentication
+
+Laravel Sanctum is used for API authentication.
+>>>>>>> 2e7a0510a6ef33ce7b2cbcf2b80a43f85736a835
