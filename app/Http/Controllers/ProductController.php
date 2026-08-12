@@ -23,7 +23,7 @@ class ProductController extends Controller
                       ->orWhere('sku', 'like', "%{$search}%");
             })
             ->latest()
-            ->paginate(10);
+            ->paginate(3);
 
         return ProductResource::collection($products);
     }
@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        
+
         $product = Product::create($request->validated());
 
         return response()->json([

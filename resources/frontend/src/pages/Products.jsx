@@ -7,11 +7,16 @@ function Products() {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [editData, setEditData] = useState(null);
+    const [page,setPage]=useState(1);
+    const [search,setSearch]=useState("");
+    const [pagination, setPagination] = useState({});
 
     const getProducts = async () => {
         try {
-            const response = await api.get("/products");
+            const response = await api.get(`/products?search=${search}&page=${page}`);
             setProducts(response.data.data ?? response.data);
+            setProducts(response.data.data);
+            setPagination(response.data.meta);
         } catch (error) {
             console.log(error);
         }
@@ -39,7 +44,7 @@ function Products() {
     useEffect(() => {
         getProducts();
         getCategories();
-    }, []);
+    }, [page,search]);
 
     const editProduct = (product) => {
         setEditData(product);
@@ -62,7 +67,11 @@ function Products() {
     return (
         <DashboardLayout>
             <ProductForm getProducts={getProducts} categories={categories} editData={editData} setEditData={setEditData} />
-
+            <div className="d-flex justify-content-end mb-3">
+                <div style={{ width: "300px" }}>
+                    <input type="text" className="form-control" placeholder="Search Products..." value={search} onChange={(e) => setSearch(e.target.value)} />
+                </div>
+            </div>
             <table className="table table-bordered table-hover bg-white mt-3">
                 <thead>
                     <tr>
@@ -101,6 +110,12 @@ function Products() {
                     )}
                 </tbody>
             </table>
+
+            <div className="d-flex justify-content-between align-items-center mt-3">
+                <button className="btn btn-secondary" disabled={page === 1} onClick={() => setPage(page - 1)}>  Previous  </button>
+                <span>  Page {pagination.current_page} of {pagination.last_page} </span>
+                <button className="btn btn-secondary" disabled={page === pagination.last_page} onClick={() => setPage(page + 1)} > Next </button>
+            </div>
         </DashboardLayout>
     );
 }

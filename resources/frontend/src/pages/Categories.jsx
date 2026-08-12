@@ -6,11 +6,15 @@ import api from "../api/axios";
 function Categories() {
     const [categories, setCategories] = useState([]);
     const [editData, setEditData] = useState(null);
+    const [page, setPage] = useState(1);
+    const [pagination, setPagination] = useState({});
 
     const getCategories = async () => {
         try {
-            const response = await api.get("/categories");
-            setCategories(response.data);
+            const response = await api.get(`/categories?page=${page}`);
+            console.log(response.data);
+            setCategories(response.data.data);
+            setPagination(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -18,7 +22,7 @@ function Categories() {
 
     useEffect(() => {
         getCategories();
-    }, []);
+    }, [page]);
 
     const editCategory = (category) => {
         setEditData(category);
@@ -75,8 +79,12 @@ function Categories() {
                     )}
                 </tbody>
             </table>
+            <div className="d-flex justify-content-between align-items-center mt-3">
+                <button className="btn btn-secondary" disabled={page === 1} onClick={() => setPage(page - 1)} > Previous  </button>
+                <span> Page {pagination.current_page} of {pagination.last_page} </span>
+                <button className="btn btn-secondary" disabled={page === pagination.last_page}  onClick={() => setPage(page + 1)} >  Next  </button>
+            </div>
             <CategoryForm getCategories={getCategories} editData={editData} setEditData={setEditData} />
-            <CategoryForm getCategories={getCategories} />
         </DashboardLayout>
     );
 }
